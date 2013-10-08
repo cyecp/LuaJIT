@@ -3,6 +3,8 @@
 ** Copyright (C) 2005-2016 Mike Pall. See Copyright Notice in luajit.h
 */
 
+// Modified by Lasse Oorni for Urho3D
+
 #define lj_err_c
 #define LUA_CORE
 
@@ -401,6 +403,12 @@ static void err_raise_ext(int errcode)
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+
+// Urho3D: added Visual Studio 2008 64-bit workaround
+#if defined(_MSC_VER) && _MSC_VER <= 1500
+typedef void* PEXCEPTION_ROUTINE;
+typedef void* PUNWIND_HISTORY_TABLE;
+#endif
 
 /* Taken from: http://www.nynaeve.net/?p=99 */
 typedef struct UndocumentedDispatcherContext {
