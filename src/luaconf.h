@@ -3,6 +3,8 @@
 ** Copyright (C) 2005-2016 Mike Pall. See Copyright Notice in luajit.h
 */
 
+// Modified by Yao Wei Tjong for Urho3D
+
 #ifndef luaconf_h
 #define luaconf_h
 
@@ -13,6 +15,7 @@
 #include <stddef.h>
 
 /* Default path for loading Lua and C modules with require(). */
+// Urho3D: add Urho3D-specific directories into search path
 #if defined(_WIN32)
 /*
 ** In Windows, any exclamation mark ('!') in the path is replaced by the
@@ -21,7 +24,7 @@
 #define LUA_LDIR	"!\\lua\\"
 #define LUA_CDIR	"!\\"
 #define LUA_PATH_DEFAULT \
-  ".\\?.lua;" LUA_LDIR"?.lua;" LUA_LDIR"?\\init.lua;"
+  ".\\?.lua;" "!\\"LUA_RDIR"?.lua;" LUA_IDIR"?.lua;" LUA_LDIR"?.lua;" LUA_LDIR"?\\init.lua;"
 #define LUA_CPATH_DEFAULT \
   ".\\?.dll;" LUA_CDIR"?.dll;" LUA_CDIR"loadall.dll"
 #else
@@ -58,7 +61,7 @@
 #define LUA_LCPATH1	";" LUA_LCDIR "?.so"
 #define LUA_LCPATH2	";" LUA_LCDIR "loadall.so"
 
-#define LUA_PATH_DEFAULT	"./?.lua" LUA_JPATH LUA_LLPATH LUA_RLPATH
+#define LUA_PATH_DEFAULT	"./?.lua" "./"LUA_RDIR"?.lua;" LUA_IDIR"?.lua;" LUA_JPATH LUA_LLPATH LUA_RLPATH
 #define LUA_CPATH_DEFAULT	"./?.so" LUA_LCPATH1 LUA_RCPATH LUA_LCPATH2
 #endif
 
